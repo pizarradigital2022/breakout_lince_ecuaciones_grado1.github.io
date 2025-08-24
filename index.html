@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Breakout Educativo - ¡Rescata al Lince!</title>
+  <link rel="icon" type="image/x-icon" href="imagenes/favicon.ico">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+    body {
+      font-family: 'Share Tech Mono', monospace;
+      text-align: center;
+      background: radial-gradient(circle at center, #0f2027, #203a43, #2c5364);
+      margin: 0;
+      padding: 0;
+      color: #ecf0f1;
+    }
+    .fase { display: none; padding: 20px; min-height: 100vh; }
+    .activa { display: block; }
+    .titulo {
+      font-size: 2.8em;
+      font-weight: bold;
+      color: #f39c12;
+      margin-bottom: 20px;
+      text-shadow: 0 0 10px #f39c12, 0 0 20px #e67e22;
+      letter-spacing: 2px;
+    }
+    .problema { 
+      margin: 15px auto; 
+      font-size: 1.3em; 
+      background: rgba(0,0,0,0.5); 
+      padding: 12px; 
+      border-radius: 10px; 
+      width: 60%;
+      box-shadow: 0 0 8px rgba(243,156,18,0.7);
+    }
+    .mensaje {
+      font-size: 2em;
+      margin-top: 20px;
+      font-weight: bold;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.6);
+    }
+    .exito { color: #2ecc71; background: rgba(46,204,113,0.15); border: 2px solid #2ecc71; text-shadow: 0 0 5px #2ecc71; }
+    .fracaso { color: #e74c3c; background: rgba(231,76,60,0.15); border: 2px solid #e74c3c; text-shadow: 0 0 5px #e74c3c; }
+    #timer {
+      font-size: 1.6em;
+      margin: 15px;
+      color: #e67e22;
+      font-weight: bold;
+      text-shadow: 0 0 10px #e67e22;
+    }
+    input, button {
+      padding: 12px;
+      margin: 10px;
+      font-size: 1em;
+      border-radius: 10px;
+      border: none;
+      font-family: 'Share Tech Mono', monospace;
+    }
+    input {
+      width: 220px;
+      text-align: center;
+      background: #2c3e50;
+      color: #ecf0f1;
+      border: 2px solid #f39c12;
+    }
+    button {
+      background: #f39c12;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+      text-transform: uppercase;
+      box-shadow: 0 0 8px #f39c12;
+      transition: 0.3s;
+    }
+    button:hover { background: #d35400; box-shadow: 0 0 15px #e67e22; }
+    img { max-width: 400px; margin: 20px auto; display: block; border-radius: 15px; box-shadow: 0 0 20px rgba(0,0,0,0.8); }
+      .problema math { font-size: 1.25em; }
+  </style>
+</head>
+<body>
+
+  <!-- Fase 1: Introducción -->
+  <div id="fase1" class="fase activa">
+    <div class="titulo">🔐 MISIÓN SECRETA: ¡Rescata al Lince! 🐾</div>
+    <img src="./imagenes/lince_enjaulado_solo.png" alt="Imagen del lince enjaulado">
+    <p>
+      🚨 Los cazadores furtivos han atrapado al <b>lince ibérico</b>. La jaula tiene un candado de 4 dígitos.
+      Resuelve las ecuaciones y consigue la combinación. Si fallas, se activará la <b>alarma</b> y serás atrapado.
+      Tienes <b>30 minutos</b> antes de que vuelvan los cazadores. ¡Es tu única oportunidad!
+    </p>
+    <p>✍️ Introduce tu nombre, agente:</p>
+    <input type="text" id="nombre" placeholder="Agente...">
+    <br>
+    <button onclick="empezarJuego()">🎯 Iniciar misión</button>
+  </div>
+
+  <!-- Fase 2: Juego -->
+  <div id="fase2" class="fase">
+    <div class="titulo">⚡ DESCIFRA LA COMBINACIÓN</div>
+    <img src="./imagenes/lince_jaula_yo_abriendo_candado.png" alt="Agente intentando abrir la jaula del lince">
+    <div id="timer">Tiempo restante: 30:00</div>
+
+    <div class="problema">1️⃣ Resuelve:
+      <math display="block">
+        <mrow>
+          <mfrac><mn>1</mn><mn>2</mn></mfrac>
+          <mo>(</mo>
+          <mrow><mn>3</mn><mi>x</mi><mo>−</mo><mn>4</mn></mrow>
+          <mo>)</mo>
+          <mo>−</mo>
+          <mfrac>
+            <mi>x</mi>
+            <mn>3</mn>
+          </mfrac>
+          <mo>=</mo>
+          <mn>5</mn>
+        </mrow>
+      </math>
+    </div>
+
+    <div class="problema">2️⃣ Resuelve:
+      <math display="block">
+        <mrow>
+          <mfrac>
+            <mrow><mn>4</mn><mi>y</mi><mo>+</mo><mn>6</mn></mrow>
+            <mn>3</mn>
+          </mfrac>
+          <mo>−</mo>
+          <mfrac>
+            <mrow><mi>y</mi><mo>−</mo><mn>2</mn></mrow>
+            <mn>2</mn>
+          </mfrac>
+          <mo>=</mo>
+          <mn>3</mn>
+        </mrow>
+      </math>
+    </div>
+
+    <div class="problema">3️⃣ Resuelve:
+      <math display="block">
+        <mrow>
+          <mfrac>
+            <mrow><mn>5</mn><mi>z</mi><mo>−</mo><mn>3</mn></mrow>
+            <mn>4</mn>
+          </mfrac>
+          <mo>+</mo>
+          <mfrac>
+            <mrow><mi>z</mi><mo>+</mo><mn>1</mn></mrow>
+            <mn>2</mn>
+          </mfrac>
+          <mo>=</mo>
+          <mfrac>
+            <mrow><mn>3</mn><mi>z</mi><mo>+</mo><mn>7</mn></mrow>
+            <mn>4</mn>
+          </mfrac>
+          <mo>+</mo>
+          <mn>1</mn>
+        </mrow>
+      </math>
+    </div>
+
+    <div class="problema">4️⃣ Resuelve:
+      <math display="block">
+        <mrow>
+          <mfrac><mi>w</mi><mn>2</mn></mfrac>
+          <mo>+</mo>
+          <mfrac>
+            <mrow><mn>3</mn><mo>−</mo><mi>w</mi></mrow>
+            <mn>3</mn>
+          </mfrac>
+          <mo>=</mo>
+          <mfrac>
+            <mrow><mn>2</mn><mi>w</mi><mo>+</mo><mn>6</mn></mrow>
+            <mn>6</mn>
+          </mfrac>
+        </mrow>
+      </math>
+    </div>
+
+    <p>Introduce los 4 dígitos (uno por cada problema):</p>
+    <input type="text" id="codigo" maxlength="4" placeholder="----" inputmode="numeric" pattern="\d{4}" title="Introduce 4 dígitos">
+    <br>
+    <button onclick="comprobarCodigo()">🔑 Desbloquear</button>
+  </div>
+
+  <!-- Fase 3: Resultado -->
+  <div id="fase3" class="fase">
+    <div class="titulo">📜 INFORME DE MISIÓN</div>
+    <div id="resultadoMensaje" class="mensaje"></div>
+    <img src="" id="resultadoImagen" alt="Espacio para imagen final">
+  </div>
+
+  <script>
+    let tiempoRestante = 30 * 60; // 30 minutos en segundos
+    let temporizador;
+    let nombreAgente = "";
+
+    const sonidoAlarma = new Audio("https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg");
+    const sonidoExito = new Audio("https://actions.google.com/sounds/v1/cartoon/wood_plank_flicks.ogg");
+
+    // ▶️ Rutas de imágenes para la fase 3 (cámbialas por tus archivos reales)
+    const IMG_EXITO = "imagenes/exito_lince.png";      // p.ej. tu avatar corriendo con el lince libre
+    const IMG_FRACASO = "imagenes/fracaso_jaula.png";  // p.ej. tú y el lince enjaulados o lince solo enjaulado
+
+    function empezarJuego() {
+      nombreAgente = document.getElementById("nombre").value;
+      if (!nombreAgente) {
+        alert("Por favor, agente, escribe tu nombre antes de comenzar.");
+        return;
+      }
+      document.getElementById("fase1").classList.remove("activa");
+      document.getElementById("fase2").classList.add("activa");
+      iniciarTemporizador();
+    }
+
+    function iniciarTemporizador() {
+      temporizador = setInterval(function() {
+        tiempoRestante--;
+        let minutos = Math.floor(tiempoRestante / 60);
+        let segundos = tiempoRestante % 60;
+        if (segundos < 10) segundos = "0" + segundos;
+        document.getElementById("timer").innerText =
+          "⏳ Tiempo restante: " + minutos + ":" + segundos;
+
+        if (tiempoRestante <= 0) {
+          clearInterval(temporizador);
+          mostrarFracaso("⏰ ¡Tiempo agotado! Los cazadores te atraparon.");
+          reproducirAlarma();
+        }
+      }, 1000);
+    }
+
+    function comprobarCodigo() {
+      const codigoIngresado = document.getElementById("codigo").value.replace(/[^0-9]/g, "");
+      if (codigoIngresado === "6030") {
+        mostrarExito("✅ ¡Misión cumplida, Agente " + nombreAgente + "! Has liberado al lince.");
+        reproducirExito();
+      } else {
+        mostrarFracaso("🚨 ¡Clave incorrecta, " + nombreAgente + "! Se activó la alarma.");
+        reproducirAlarma();
+      }
+    }
+
+    function mostrarExito(mensaje) {
+      clearInterval(temporizador);
+      document.getElementById("fase2").classList.remove("activa");
+      document.getElementById("fase3").classList.add("activa");
+      document.getElementById("resultadoMensaje").innerText = mensaje;
+      document.getElementById("resultadoMensaje").className = "mensaje exito";
+      const imgExito = document.getElementById("resultadoImagen");
+      imgExito.src = IMG_EXITO;
+      imgExito.alt = "Éxito: lince liberado";
+    }
+
+    function mostrarFracaso(mensaje) {
+      clearInterval(temporizador);
+      document.getElementById("fase2").classList.remove("activa");
+      document.getElementById("fase3").classList.add("activa");
+      document.getElementById("resultadoMensaje").innerText = mensaje;
+      document.getElementById("resultadoMensaje").className = "mensaje fracaso";
+      const imgFracaso = document.getElementById("resultadoImagen");
+      imgFracaso.src = IMG_FRACASO;
+      imgFracaso.alt = "Fracaso: lince enjaulado y candado cerrado";
+    }
+
+    function reproducirAlarma() {
+      sonidoAlarma.play();
+    }
+
+    function reproducirExito() {
+      sonidoExito.play();
+    }
+  </script>
+  <footer>
+    <p>
+		<a target="_blank" href= "https://creativecommons.org/licenses/by-sa/4.0/ "><img src="imagenes/88x31.png" alt="Licencia CC-BY-SA"></a>
+      Joaquín Candañedo Arancón
+    </p>
+  </footer>
+</body>
+</html>
